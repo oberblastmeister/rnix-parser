@@ -2,22 +2,21 @@
 mod macros;
 pub mod ast;
 mod kinds;
-pub mod parser;
+mod parser;
 #[cfg(test)]
 mod tests;
 mod token_set;
-pub mod tokenizer;
+mod tokenizer;
 
 use std::marker::PhantomData;
 
 pub use self::{kinds::SyntaxKind, tokenizer::tokenize};
 
 use ast::AstNode;
-use parser::ParseError;
+pub use parser::ParseError;
 use rowan::GreenNode;
 pub use rowan::{NodeOrToken, TextRange, TextSize, TokenAtOffset, WalkEvent};
 pub(crate) use token_set::TokenSet;
-
 use self::tokenizer::Tokenizer;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
