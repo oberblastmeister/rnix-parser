@@ -17,7 +17,7 @@ pub use parser::ParseError;
 use rowan::GreenNode;
 pub use rowan::{NodeOrToken, TextRange, TextSize, TokenAtOffset, WalkEvent};
 pub(crate) use token_set::TokenSet;
-use self::tokenizer::Tokenizer;
+pub use tokenizer::Token;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum NixLanguage {}
@@ -44,7 +44,7 @@ pub use ast::Root;
 
 impl Root {
     pub fn parse(s: &str) -> Parse<Root> {
-        let (green, errors) = parser::parse(Tokenizer::new(s));
+        let (green, errors) = parser::parse(tokenize(s));
         Parse { green, errors, _ty: PhantomData }
     }
 }
